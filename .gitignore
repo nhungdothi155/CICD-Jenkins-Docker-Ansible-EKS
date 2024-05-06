@@ -1,0 +1,12 @@
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+terraform/.terraform
+terraform/main.tf
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
