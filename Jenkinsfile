@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        DOCKER_IMAGE = "thidonhung/cicd-mock"
+        DOCKER_IMAGE = "nhungdt/nginx"
     }
     stages {
         stage("Build"){
@@ -25,26 +25,6 @@ pipeline {
                 //clean to save disk
                 sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 sh "docker image rm ${DOCKER_IMAGE}:latest"
-            }
-        }
-        stage("Deploy"){
-            options {
-                timeout(time: 10, unit: 'MINUTES')
-            }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    ansiblePlaybook(
-                        credentialsId: 'private_key',
-                        playbook: 'playbook.yml',
-                        inventory: 'hosts',
-                        become: 'yes',
-                        extraVars: [
-                            DOCKER_USERNAME: "${DOCKER_USERNAME}",  
-                            DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
-                        ]
-                    )
-                }
-                
             }
         }
     }
