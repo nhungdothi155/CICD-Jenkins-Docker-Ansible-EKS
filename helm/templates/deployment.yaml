@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}
+  labels: {{ include "nginx.labels" . | indent 4}}
+spec:
+  # modify replicas according to your case
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: {{ include "nginx.labels" . | indent 6}}
+  template:
+    metadata:
+      labels: {{include "nginx.labels" . | indent 8}}
+    spec:
+      containers:
+        - name: {{ .Release.Name}}
+          image: {{ .Values.image}}
