@@ -3,16 +3,16 @@
   vars:
      helm_chart_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
   tasks:
-      - name: Add helm repo
-        kubernetes.core.helm_repository:
-            name: nginx
-            repo_url: "{{ helm_chart_url }}"
-      - name: Install helm chart
-        kubernetes.core.helm:
-            name: nginx-server
-            namespace: thidonhung
-            chart_ref: nginx/nginx
-      - name: Gather information about nginx-server
-        kubernetes.core.helm_info:
-            name: nginx-server
-            release_namespace: thidonhung
+    - name: Add helm repo
+      kubernetes.core.helm_repository:
+        name: nginx
+        repo_url: "{{ helm_chart_url }}"
+    - name: Install helm chart
+      kubernetes.core.helm:
+        name: nginx-server
+        namespace: thidonhung
+        chart_ref: nginx/nginx
+    - name: Gather information about nginx-server
+      kubernetes.core.helm_info:
+        name: nginx-server
+        release_namespace: thidonhung
