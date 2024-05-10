@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        DOCKER_IMAGE = "buiquanglam/nginx"
+        DOCKER_IMAGE = "thidonhung/nginx"
     }
     stages {
         stage("Build"){
@@ -36,7 +36,6 @@ pipeline {
                     ansiblePlaybook(
                         credentialsId: 'private_key',
                         playbook: 'playbook.yml',
-                        inventory: 'hosts',
                         become: 'yes',
                         extraVars: [
                             DOCKER_USERNAME: "${DOCKER_USERNAME}",  
