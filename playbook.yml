@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
     - name: Add helm repo
-      kubernetes.core.helm_repository:
+      community.kubernetes.helm_repository:
         name: nginx
         repo_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
     - name: Install helm chart
