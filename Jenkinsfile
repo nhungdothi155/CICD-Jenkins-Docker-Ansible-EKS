@@ -32,7 +32,7 @@ pipeline {
                 timeout(time: 10, unit: 'MINUTES')
             }
              steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     ansiblePlaybook(
                         playbook: 'playbook.yml',
                         extras: '-e aws_access_key_id=${AWS_ACCESS_KEY_ID} -e aws_secret_access_key=${AWS_SECRET_ACCESS_KEY} -e region=us-east-1 -e cluster_name=DevOpsJanuary'
