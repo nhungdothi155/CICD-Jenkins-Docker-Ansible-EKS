@@ -6,11 +6,11 @@
         name: nginx
         repo_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
     - name: Install helm chart
-      kubernetes.core.helm:
+      community.kubernetes.helm:
         name: nginx-server
         namespace: thidonhung
         chart_ref: nginx/nginx
     - name: Gather information about nginx-server
-      kubernetes.core.helm_info:
+      community.kubernetes.helm_info:
         name: nginx-server
         release_namespace: thidonhung
