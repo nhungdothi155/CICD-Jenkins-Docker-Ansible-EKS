@@ -1,12 +1,10 @@
 ---
 - hosts: localhost
-  vars:
-     helm_chart_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
   tasks:
     - name: Add helm repo
       kubernetes.core.helm_repository:
         name: nginx
-        repo_url: "{{ helm_chart_url }}"
+        repo_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
     - name: Install helm chart
       kubernetes.core.helm:
         name: nginx-server
