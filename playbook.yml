@@ -1,11 +1,26 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Configure AWS credentials
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
+        AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
+        AWS_DEFAULT_REGION: "{{ region }}"
+
+    - name: Configure Kubernetes context
+      command: aws eks update-kubeconfig --region {{ region }} --name {{ cluster_name }} 
+      
     - name: Add Helm repository using command line
       ansible.builtin.shell:
         cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
       args:
         executable: /bin/bash
+    - name: Update Helm repository
+      ansible.builtin.shell:
+        cmd: helm repo update
+      args:
+        executable: /bin/bash
+  
     - name: Install Helm chart using command line
       ansible.builtin.shell:
         cmd: helm install nginx nginx/nginx --namespace thidonhung --create-namespace --wait

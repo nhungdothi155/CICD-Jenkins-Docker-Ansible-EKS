@@ -31,18 +31,13 @@ pipeline {
             options {
                 timeout(time: 10, unit: 'MINUTES')
             }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+             steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     ansiblePlaybook(
                         playbook: 'playbook.yml',
-                        become: 'yes',
-                        extraVars: [
-                            DOCKER_USERNAME: "${DOCKER_USERNAME}",  
-                            DOCKER_PASSWORD: "${DOCKER_PASSWORD}" 
-                        ]
+                        extras: '-e aws_access_key_id=${AWS_ACCESS_KEY_ID} -e aws_secret_access_key=${AWS_SECRET_ACCESS_KEY} -e region=us-east-1 -e cluster_name=DevOpsJanuary'
                     )
                 }
-                
             }
         }
     }
