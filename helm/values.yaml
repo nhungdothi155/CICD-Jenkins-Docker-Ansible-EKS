@@ -1,5 +1,5 @@
 #define variable of values should be cammel case
-replicaCount: 4
+replicaCount: 2
 image: nginx:1.25.4
 labels:
  app: nginx 
