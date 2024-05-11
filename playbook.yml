@@ -7,9 +7,14 @@
         repo_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
     - name: Install helm chart
       community.kubernetes.helm:
-        name: nginx-server
-        namespace: thidonhung
-        chart_ref: nginx/nginx
+        kubeconfig: "/home/ubuntu/.kube/config"
+        name: "nginx"
+        chart_ref: "nginx/nginx"
+        release_namespace: "thidonhung"
+        create_namespace: true
+        values: "{{ lookup('file', 'values.yaml') }}"
+        wait: true
+        state: present
     - name: Gather information about nginx-server
       community.kubernetes.helm_info:
         name: nginx-server
