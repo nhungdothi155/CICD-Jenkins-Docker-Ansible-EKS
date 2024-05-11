@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   tasks:
     - name: Add helm repo
       kubernetes.core.helm_repository:
