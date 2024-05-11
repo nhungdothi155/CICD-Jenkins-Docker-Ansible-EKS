@@ -12,7 +12,6 @@
         chart_ref: "nginx/nginx"
         release_namespace: "thidonhung"
         create_namespace: true
-        values: "{{ lookup('file', 'values.yaml') }}"
         wait: true
         state: present
     - name: Gather information about nginx-server
