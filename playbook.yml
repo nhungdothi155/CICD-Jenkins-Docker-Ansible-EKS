@@ -2,12 +2,12 @@
 - hosts: localhost
   tasks:
     - name: Add Helm repository using command line
-      ansible.builtin.command:
+      ansible.builtin.shell:
         cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
       args:
         executable: /bin/bash
     - name: Install Helm chart using command line
-      ansible.builtin.command:
+      ansible.builtin.shell:
         cmd: helm install nginx nginx/nginx --namespace thidonhung --create-namespace --kubeconfig /home/ubuntu/.kube/config --wait
       args:
         executable: /bin/bash
