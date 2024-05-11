@@ -6,6 +6,7 @@ metadata:
 spec:
   # modify replicas according to your case
   replicas: {{ .Values.replicaCount }}
+  nodeSelector:
   selector:
     matchLabels: {{ include "nginx.labels" . | indent 6}}
   template:
@@ -15,3 +16,6 @@ spec:
       containers:
         - name: {{ .Release.Name}}
           image: {{ .Values.image}}
+      nodeSelector:
+        thidonhung: test
+
