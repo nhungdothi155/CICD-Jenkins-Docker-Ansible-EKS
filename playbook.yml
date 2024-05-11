@@ -1,15 +1,21 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Install AWS CLI
+      ansible.builtin.package:
+        name: awscli
+        state: present
+
     - name: Configure AWS credentials
-      environment:
-        AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
-        AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
-        AWS_DEFAULT_REGION: "{{ region }}"
+      ansible.builtin.shell:
+        cmd: |
+          aws configure set aws_access_key_id {{ aws_access_key_id }}
+          aws configure set aws_secret_access_key {{ aws_secret_access_key }}
+          aws configure set default.region {{ region }}
 
     - name: Configure Kubernetes context
       command: aws eks update-kubeconfig --region {{ region }} --name {{ cluster_name }} 
-      
+
     - name: Add Helm repository using command line
       ansible.builtin.shell:
         cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
