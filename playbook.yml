@@ -21,6 +21,11 @@
         cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
       args:
         executable: /bin/bash
+    - name: Delete the previous repo 
+      ansible.builtin.shell:
+        cmd: helm delete nginx --namespace thidonhung
+      args:
+        executable: /bin/bash
     - name: Update Helm repository
       ansible.builtin.shell:
         cmd: helm repo update
