@@ -5,6 +5,14 @@
       community.kubernetes.helm_repository:
         name: nginx
         repo_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
+    - name: List kubeconfig directory
+      ansible.builtin.command:
+        cmd: ls -la /home/ubuntu/.kube/
+      register: ls_output
+
+    - name: Show list output
+      ansible.builtin.debug:
+        msg: "{{ ls_output.stdout }}"
     - name: Install helm chart
       community.kubernetes.helm:
         kubeconfig: "/home/ubuntu/.kube/config"
