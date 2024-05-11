@@ -1,28 +1,13 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Add helm repo
-      community.kubernetes.helm_repository:
-        name: nginx
-        repo_url: "https://nhungdothi155.github.io/cicd-mock-project/charts"
-    - name: List kubeconfig directory
+    - name: Add Helm repository using command line
       ansible.builtin.command:
-        cmd: ls -la /home/ubuntu/.kube/
-      register: ls_output
-
-    - name: Show list output
-      ansible.builtin.debug:
-        msg: "{{ ls_output.stdout }}"
-    - name: Install helm chart
-      community.kubernetes.helm:
-        kubeconfig: "/home/ubuntu/.kube/config"
-        name: "nginx"
-        chart_ref: "nginx/nginx"
-        release_namespace: "thidonhung"
-        create_namespace: true
-        wait: true
-        state: present
-    - name: Gather information about nginx-server
-      community.kubernetes.helm_info:
-        name: nginx-server
-        release_namespace: thidonhung
+        cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
+      args:
+        executable: /bin/bash
+    - name: Install Helm chart using command line
+      ansible.builtin.command:
+        cmd: helm install nginx nginx/nginx --namespace thidonhung --create-namespace --kubeconfig /home/ubuntu/.kube/config --wait
+      args:
+        executable: /bin/bash
