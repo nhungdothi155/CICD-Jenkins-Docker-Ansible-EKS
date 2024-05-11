@@ -35,6 +35,6 @@
 
     - name: Install Helm chart using command line
       ansible.builtin.shell:
-        cmd: helm install nginx nginx/nginx --namespace thidonhung --create-namespace --wait
+        cmd: helm install nginx nginx/nginx --namespace thidonhung --create-namespace --wait --timeout 15m
       args:
         executable: /bin/bash
