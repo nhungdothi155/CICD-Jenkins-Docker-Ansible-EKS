@@ -16,22 +16,6 @@
     - name: Configure Kubernetes context
       command: aws eks update-kubeconfig --region {{ region }} --name {{ cluster_name }} 
 
-    - name: Check if the namespace 'thidonhung' exists
-      ansible.builtin.k8s_info:
-        api_version: v1
-        kind: Namespace
-        name: thidonhung
-      register: ns
-
-    - name: Create namespace 'thidonhung' if it does not exist
-      ansible.builtin.k8s:
-        definition:
-          apiVersion: v1
-          kind: Namespace
-          metadata:
-            name: thidonhung
-      when: ns.resources | length == 0
-
     - name: Add Helm repository using command line
       ansible.builtin.shell:
         cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
@@ -43,7 +27,12 @@
         cmd: helm repo update
       args:
         executable: /bin/bash
-  
+
+    - name: Delete Helm release if it exists
+      ansible.builtin.shell:
+        cmd: helm delete nginx --namespace thidonhung
+      ignore_errors: true
+
     - name: Install Helm chart using command line
       ansible.builtin.shell:
         cmd: helm install nginx nginx/nginx --namespace thidonhung --create-namespace --wait
