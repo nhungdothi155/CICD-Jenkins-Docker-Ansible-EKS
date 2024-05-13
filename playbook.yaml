@@ -8,7 +8,7 @@
         executable: /bin/bash
     - name: Add Helm repository using command line
       ansible.builtin.shell:
-        cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
+        cmd: helm repo add nginx https://nhungdothi155.github.io/CICD-Jenkins-Docker-Ansible-EKS/charts
       args:
         executable: /bin/bash
         
