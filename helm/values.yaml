@@ -17,7 +17,7 @@ service:
     name: http
     protocal: TCP
 env: thidonhung
-dockerSecret: dockerSecret
+dockerSecret: docker-secret
 nodeSelector: 
   labelName: thidonhung
   labelValue: dev
