@@ -18,6 +18,13 @@
       args:
         executable: /bin/bash
 
+    - name: Echo helm list
+      ansible.builtin.shell:
+          cmd: helm list 
+      args:
+        executable: /bin/bash
+           
+
     - name: Install Helm chart using command line
       ansible.builtin.shell:
         cmd: helm upgrade --install nginx nginx/nginx --namespace thidonhung-prod --create-namespace  --values /helm/values/values-prod.yaml --wait --timeout 15m
