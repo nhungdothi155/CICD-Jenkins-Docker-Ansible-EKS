@@ -1,7 +1,5 @@
 ---
 - hosts: localhost
-  become: true
-  remote_user: ubuntu
   tasks:
     - name: Configure aws 
       ansible.builtin.shell:
