@@ -1,0 +1,17 @@
+#define variable of values should be cammel case
+replicaCount: 1
+namespace: thidonhung-dev
+image: nhungdt/nginx:latest
+labels:
+ app: nginx 
+ env: dev
+service:
+  metadata:
+    name: nginx-service
+  spec:
+    type: LoadBalancer
+    port: 80
+    targetPort: 80
+    name: http
+    protocal: TCP
+env: thidonhung-dev

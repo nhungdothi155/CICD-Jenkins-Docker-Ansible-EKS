@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Add Helm repository using command line
+      ansible.builtin.shell:
+        cmd: helm repo add nginx https://nhungdothi155.github.io/cicd-mock-project/charts
+      args:
+        executable: /bin/bash
+        
+    - name: Update Helm repository
+      ansible.builtin.shell:
+        cmd: helm repo update
+      args:
+        executable: /bin/bash
+
+    - name: Install Helm chart using command line
+      ansible.builtin.shell:
+        cmd: helm upgrade --install nginx nginx/nginx --namespace thidonhung-prod --create-namespace --values values.yaml --values values/values-prod.yaml --wait --timeout 15m
+      args:
+        executable: /bin/bash

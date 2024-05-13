@@ -1,17 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-wildcard-host
+  name: ingress
+  labels: {{ include "nginx.labels" . | indent 4}}
 spec:
   ingressClassName: nginx
   rules:
-  - host: "thidonhung.devopsjanuary.com"
+  - host: {{ .Values.ingress.host}}
     http:
       paths:
-      - pathType: Prefix
-        path: "/nginx"
+      - pathType: {{ .Values.ingress.http.paths.pathType}}
+        path: {{ .Values.ingress.http.paths.path}}
         backend:
           service:
-            name: nginx-service
+            name: {{ .Values.ingress.http.paths.backend.service.name}}
             port:
-              number: 80
+              number: {{ .Values.ingress.http.paths.backend.service.port}}

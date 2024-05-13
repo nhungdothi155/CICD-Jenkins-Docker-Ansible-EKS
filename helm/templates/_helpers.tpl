@@ -4,5 +4,8 @@
 
 {{- define "nginx.labels" }}
 app: {{ .Values.labels.app}}
-env: {{ .Values.labels.env}}
 {{ end -}}
+
+{{- define "nodeSelector.labels"}}
+{{ .Values.nodeSelector.labelValue}}: {{ .Values.nodeSelector.labelValue}}
+{{end -}}

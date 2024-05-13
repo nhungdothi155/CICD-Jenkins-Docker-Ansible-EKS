@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name}}
+  namespace: {{ .Values.namespace}}
   labels: {{ include "nginx.labels" . | indent 4}}
 spec:
   # modify replicas according to your case
@@ -13,8 +14,11 @@ spec:
       labels: {{include "nginx.labels" . | indent 8}}
     spec:
       containers:
-        - name: {{ .Release.Name}}
-          image: {{ .Values.image}}
+      - name: {{ .Release.Name}}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      imagePullSecrets:
+      - name: {{ .Values.dockerSecret}} 
       nodeSelector:
-        thidonhung: test
+        {{include "nodeSelector.labels" . | indent 8}}
 
