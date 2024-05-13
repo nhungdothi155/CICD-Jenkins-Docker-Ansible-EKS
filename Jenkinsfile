@@ -46,17 +46,6 @@ pipeline {
                 }
                 
             }
-             steps {
-                withCredentials() {
-                  ansiblePlaybook(
-                        playbook: './'
-                )
-                 
-                }
-
-
-               
-            }
         }
     }
     post {
