@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  become: yes
+  become_user: ubuntu
   tasks:
     - name: Configure aws 
       ansible.builtin.shell:
@@ -35,5 +37,5 @@
         - /home/ubuntu/helm/values/values-prod.yaml
         wait: true
         wait_timeout: 15m
-      become: true
+      become: yes
       become_user: ubuntu  # change to the user that should run Helm
