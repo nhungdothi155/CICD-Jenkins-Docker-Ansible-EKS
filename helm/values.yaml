@@ -1,6 +1,6 @@
 #define variable of values should be cammel case
 replicaCount: 1
-namespace: thidonhung-dev
+namespace: thidonhung-prod
 image:
   repository: thidonhung/nginx
   tag: latest
