@@ -25,8 +25,15 @@
         executable: /bin/bash
            
 
-    - name: Install Helm chart using command line
-      ansible.builtin.shell:
-        cmd: helm upgrade --install nginx nginx/nginx --namespace thidonhung-prod --create-namespace  --values /home/ubuntu/helm/values/values-prod.yaml --wait --timeout 15m
-      args:
-        executable: /bin/bash
+    - name: Install or upgrade Helm release
+      community.kubernetes.helm:
+        name: nginx
+        chart_ref: nginx/nginx
+        release_namespace: thidonhung-prod
+        create_namespace: true
+        values_files:
+        - /home/ubuntu/helm/values/values-prod.yaml
+        wait: true
+        wait_timeout: 15m
+      become: true
+      become_user: ubuntu  # change to the user that should run Helm
