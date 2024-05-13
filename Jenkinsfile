@@ -35,11 +35,6 @@ pipeline {
                 timeout(time: 10, unit: 'MINUTES')
             }
              steps {
-                //to let helm using thidonhung/nginx image from private repo
-
-                withCredentials([usernamePassword(credentialsId: "docker-hub", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh "kubectl create secret docker-registry dockerSecret --docker-server=https://index.docker.io/v1/ --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD"
-                }
                 //set up aws eks 
                 withCredentials([aws(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     script {
@@ -47,6 +42,13 @@ pipeline {
                         sh "aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME} --region ${AWS_DEFAULT_REGION}"
                     }
                 }
+                
+                //to let helm using thidonhung/nginx image from private repo
+
+                withCredentials([usernamePassword(credentialsId: "docker-hub", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "kubectl create secret docker-registry dockerSecret --docker-server=https://index.docker.io/v1/ --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD"
+                }
+            
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     ansiblePlaybook(
                         playbook: '/ansible/install_helm_chart.yml'
