@@ -2,7 +2,7 @@
 replicaCount: 1
 namespace: thidonhung-prod
 image:
-  repository: thidonhung/nginx
+  repository: nhungdt/nginx
   tag: latest
   pullPolicy: Always
 labels:
@@ -20,10 +20,12 @@ env: thidonhung
 dockerSecret: docker-secret
 nodeSelector: 
   labelName: thidonhung
-  labelValue: "prod"
+  labelValue: prod
 
 ingress:
   host: thidonhung.devopsjanuary.com
+  className: nginx-ingress-prod
+  name: ingress-prod
   http:
     paths:
       pathType: Prefix
