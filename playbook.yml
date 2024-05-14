@@ -46,9 +46,9 @@
       community.kubernetes.helm:
         name: nginx
         chart_ref: nginx/nginx
-        release_namespace: thidonhung-prod
+        release_namespace: thidonhung-dev
         create_namespace: true
         values_files:
-        - /home/ubuntu/helm/values/values-prod.yaml
+        - /home/ubuntu/helm/values/values-dev.yaml
         wait: true
         wait_timeout: 15m
