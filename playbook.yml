@@ -1,8 +1,16 @@
 ---
 - hosts: server
+  
   remote_user: ubuntu
   become: yes
+  
   tasks:
+    - name: Install AWS CLI
+      apt:
+        name: awscli
+        state: present
+        update_cache: yes
+  
     - name: Configure AWS CLI
       ansible.builtin.shell:
         cmd: aws configure set aws_access_key_id {{AWS_ACCESS_KEY_ID}} && \
