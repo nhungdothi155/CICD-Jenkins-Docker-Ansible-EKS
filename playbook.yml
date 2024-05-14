@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   become: yes
+  become_user: ubuntu
   tasks:
     - name: Configure aws 
       ansible.builtin.shell:
