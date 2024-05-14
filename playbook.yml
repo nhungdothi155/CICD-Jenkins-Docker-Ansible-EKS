@@ -50,5 +50,7 @@
         create_namespace: true
         values_files:
         - /home/ubuntu/helm/values/values-prod.yaml
+        values:
+          image.tag: "latest"
         wait: true
         wait_timeout: 15m
