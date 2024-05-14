@@ -3,7 +3,15 @@
   remote_user: ubuntu
   become: yes
   tasks:
-    - name: Configure aws 
+    - name: Configure AWS CLI
+      ansible.builtin.shell:
+        cmd: aws configure set aws_access_key_id {{AWS_ACCESS_KEY_ID}} && \
+             aws configure set aws_secret_access_key {{AWS_SECRET_ACCESS_KEY}} && \
+             aws configure set region {{AWS_DEFAULT_REGION}} && \
+      args:
+        executable: /bin/bash
+   
+    - name: Configure aws cluster
       ansible.builtin.shell:
         cmd : aws eks update-kubeconfig --name {{EKS_CLUSTER_NAME}} --region {{AWS_DEFAULT_REGION}}
       args:
