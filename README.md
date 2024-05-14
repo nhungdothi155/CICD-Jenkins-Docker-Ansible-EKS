@@ -1,5 +1,5 @@
 # CICD : EC2, Jenkins,Docker, Helm, Ansible, EKS, Route53
-![image](https://github.com/nhungdothi155/cicd-mock-project/assets/77849669/6bfd458e-aa3a-4aab-8148-ed2b14f5ade7)
+![image](https://github.com/nhungdothi155/CICD-Jenkins-Docker-Ansible-EKS/assets/77849669/5de11a21-e6a5-4603-9f80-3cbb82d97ded)
 ## Tables Content
 * [General Flow](#general-info)
 * [Installation Guide](#installation-guide)
