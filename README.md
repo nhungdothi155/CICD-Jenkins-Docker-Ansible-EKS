@@ -67,3 +67,7 @@
 4. Check all the pod belong to a group
    https://stackoverflow.com/questions/48983354/kubernetes-list-all-pods-and-its-nodes
 # References
+https://helm.sh/docs/
+https://kubernetes.io/docs/home/
+https://docs.ansible.com/
+https://docs.aws.amazon.com/
