@@ -7,6 +7,11 @@
 * [References](#references)
 
 # General Flow 
+1. User commit code to the github then github
+2. Jenkins will start listen to github if there any message its will build the pipeline base on the set up
+3. CI (Build, Test, Push the newest image to Docker registry) : We will use docker then build new image base on lastest commit , then push this to Docker Registry 
+4. CD (Deploy) : We will use Ansible to automate the proccess install helm package for deployment in eks
+   
 # Installation Guilde
 > Create EC2 instance ( version ubuntu 22.04)
   ~~~
