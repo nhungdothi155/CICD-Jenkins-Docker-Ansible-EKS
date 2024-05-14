@@ -39,6 +39,7 @@ pipeline {
                     ansiblePlaybook(
                         credentialsId: 'private_key',
                         playbook: 'playbook.yml',
+                        inventory: 'hosts',
                         become: 'yes',
                         extraVars: [
                             EKS_CLUSTER_NAME: "${EKS_CLUSTER_NAME}",  
