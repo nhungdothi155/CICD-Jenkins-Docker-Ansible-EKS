@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  become: yes
   tasks:
     - name: Configure aws 
       ansible.builtin.shell:
@@ -31,3 +32,13 @@
         chart_ref: nginx/nginx
         release_namespace: thidonhung-prod
         create_namespace: true
+    - name: Install or upgrade Helm release
+      community.kubernetes.helm:
+        name: nginx
+        chart_ref: nginx/nginx
+        release_namespace: thidonhung-prod
+        create_namespace: true
+        values_files:
+        - /home/ubuntu/helm/values/values-prod.yaml
+        wait: true
+        wait_timeout: 15m

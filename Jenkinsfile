@@ -38,6 +38,8 @@ pipeline {
                 withCredentials([aws(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'),usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     ansiblePlaybook(
                         playbook: 'playbook.yaml',
+                        credentials: "private_key"
+                        become: 'yes',
                         extraVars: [
                             EKS_CLUSTER_NAME: "${EKS_CLUSTER_NAME}",  
                             AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}" 
