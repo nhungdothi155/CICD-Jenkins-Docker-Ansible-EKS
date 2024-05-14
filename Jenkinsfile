@@ -37,7 +37,7 @@ pipeline {
              steps {
                 withCredentials([aws(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'),usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     ansiblePlaybook(
-                        credentials: 'private_key'
+                        credentials: 'private_key',
                         playbook: 'playbook.yaml',
                         become: 'yes',
                         extraVars: [
