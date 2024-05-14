@@ -20,7 +20,7 @@ env: thidonhung
 dockerSecret: docker-secret
 nodeSelector: 
   labelName: thidonhung
-  labelValue: dev
+  labelValue: "prod"
 
 ingress:
   host: thidonhung.devopsjanuary.com

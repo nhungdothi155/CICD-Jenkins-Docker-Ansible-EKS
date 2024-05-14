@@ -19,6 +19,5 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
       imagePullSecrets:
       - name: {{ .Values.dockerSecret}} 
-      nodeSelector: 
-        thidonhung: prod
+      nodeSelector: {{include "nodeSelector.labels" . | indent 8}}
 
