@@ -13,6 +13,6 @@ spec:
         path: {{ .Values.ingress.http.paths.path}}
         backend:
           service:
-            name: {{ .Values.ingress.http.paths.backend.service.name}}
+            name: {{ .Values.service.metadata.name}}
             port:
-              number: {{ .Values.ingress.http.paths.backend.service.port}}
+              number: {{ .Values.service.spec.port}}
