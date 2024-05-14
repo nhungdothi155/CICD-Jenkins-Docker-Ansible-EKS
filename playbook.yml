@@ -27,12 +27,12 @@
         executable: /bin/bash
            
 
-    - name: Install or upgrade Helm release
-      community.kubernetes.helm:
-        name: nginx
-        chart_ref: nginx/nginx
-        release_namespace: thidonhung-prod
-        create_namespace: true
+    # - name: Install or upgrade Helm release
+    #   community.kubernetes.helm:
+    #     name: nginx
+    #     chart_ref: nginx/nginx
+    #     release_namespace: thidonhung-prod
+    #     create_namespace: true
     - name: Install or upgrade Helm release
       community.kubernetes.helm:
         name: nginx
