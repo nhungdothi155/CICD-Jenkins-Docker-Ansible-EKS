@@ -6,10 +6,9 @@
   
   tasks:
     - name: Install AWS CLI
-      apt:
+      ansible.builtin.package:
         name: awscli
         state: present
-        update_cache: yes
   
     - name: Configure AWS CLI
       ansible.builtin.shell:
