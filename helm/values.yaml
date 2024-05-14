@@ -9,7 +9,7 @@ labels:
  app: nginx 
 service:
   metadata:
-    name: nginx-service
+    name: nginx-service-prod
   spec:
     type: LoadBalancer
     port: 80

@@ -2,14 +2,14 @@
 replicaCount: 1
 namespace: thidonhung-dev
 image:
-  repository: thidonhung/nginx
+  repository: nhungdt/nginx
   tag: latest
   pullPolicy: Always
 labels:
  app: nginx 
 service:
   metadata:
-    name: nginx-service
+    name: nginx-service-dev
   spec:
     type: LoadBalancer
     port: 80
@@ -17,13 +17,15 @@ service:
     name: http
     protocal: TCP
 env: thidonhung
-dockerSecret: dockerSecret
+dockerSecret: docker-secret
 nodeSelector: 
   labelName: thidonhung
   labelValue: dev
 
 ingress:
-  host: thidonhung.devopsjanuary.com
+  host: thidonhung-dev.devopsjanuary.com
+  className: nginx-ingress-dev
+  name: ingress-dev
   http:
     paths:
       pathType: Prefix
